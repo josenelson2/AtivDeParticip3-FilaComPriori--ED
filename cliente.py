@@ -1,0 +1,79 @@
+from priorityQueue import priorityQueue
+
+def menu():
+    print("-----------------------------------------------------")
+    print("1. Chegada de pessoa para atendimento")
+    print("2. Atendimento de uma pessoa")
+    print("3. Listar todas as pessoas da fila")
+    print("4.  Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
+    print("5. SAIR")
+    
+
+fila = priorityQueue()
+atendimentos_normais = 0
+atendimentos_prioridade = 0
+
+while True:
+
+    menu()
+    op = input("Selecione a opção desejada: ")
+
+    if (op == '1'):
+        print("-----------------------------------------------------")
+        print("ATENDIMENTO:")
+        print("1 - Prioridade")
+        print("2 - Normal")
+
+        modalidade = input("Selecione a modalidade do atendimento: ")
+
+        if (modalidade == '1'):
+            nome = input("Nome da pessoa: ")
+            #queue.enqueue(nome, True)
+            print(f"Pronto. A pessoa '{nome}' foi adicionada na fila na modalidade PRIORIDADE")
+            
+        elif (modalidade == '2'):
+            nome = input("Nome da pessoa: ")
+            #queue.dequeue(nome, False)
+            print(f"Pronto. A pessoa '{nome}' foi adicionada na fila na modalidade NORMAL")
+            
+        else: 
+            print("OPÇÃO INVÁLIDA! RETORNANDO AO MENU.")
+
+    elif (op == '2'):
+        print("-----------------------------------------------------")
+        if fila.is_empty(): #verifica se a fila está vazia
+            print("A fila está vazia!\n")
+        else:
+            for _ in range(3): #atende 3 pessoas normais 
+                if fila.sizeN > 0: #verifica se há pessoas na fila normal
+                    #print("Atendendo(Normal): {} ".format(fila.dequeue))
+                    atendimentos_normais += 1 #incrementa um atendimento
+                else:
+                    break #se não houve pessoas na fila ele para
+            if fila.sizeP > 0:
+                #print("Atendendo(Prioridade): {} ".format(fila.dequeue))
+                atendimentos_prioridade += 1 #incrementa um atendimento
+
+    elif (op == '3'):
+        print("-----------------------------------------------------")
+        if fila.is_empty:
+            print("A fila está vazia!")
+        else:
+            print("--------FILA--------")
+            fila.list()
+
+    elif (op == '4'):
+        print("-----------------------------------------------------")
+
+    elif (op == '5'):
+        print("-----------------------------------------------------")
+        if fila.is_empty():
+            total = atendimentos_normais + atendimentos_prioridade
+            if total > 0:
+                percentual_normal = (atendimentos_normais/total) * 100
+                percentual_prioridade = (atendimentos_prioridade/total) * 100
+
+
+    else:
+        print("-----------------------------------------------------")
+        print("OPÇÃO INVÁLIDA. RETORNANDO AO MENU. TENTE NOVAMENTE.")
