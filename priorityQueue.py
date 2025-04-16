@@ -19,7 +19,8 @@ class priorityQueue:
             print(current.name + " - " + tipo) 
             current = current.next
 
-    
+    def is_empty(self):
+        return self.head is None
 
             
 
