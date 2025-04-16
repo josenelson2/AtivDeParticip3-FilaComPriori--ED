@@ -5,7 +5,7 @@ def menu():
     print("1. Chegada de pessoa para atendimento")
     print("2. Atendimento de uma pessoa")
     print("3. Listar todas as pessoas da fila")
-    print("4.  Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
+    print("4. Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
     print("5. SAIR")
     
 
@@ -28,12 +28,12 @@ while True:
 
         if (modalidade == '1'):
             nome = input("Nome da pessoa: ")
-            #queue.enqueue(nome, True)
+            fila.enqueue(nome, True)
             print(f"Pronto. A pessoa '{nome}' foi adicionada na fila na modalidade PRIORIDADE")
             
         elif (modalidade == '2'):
             nome = input("Nome da pessoa: ")
-            #queue.dequeue(nome, False)
+            fila.enqueue(nome, False)
             print(f"Pronto. A pessoa '{nome}' foi adicionada na fila na modalidade NORMAL")
             
         else: 
@@ -46,17 +46,17 @@ while True:
         else:
             for _ in range(3): #atende 3 pessoas normais 
                 if fila.sizeN > 0: #verifica se há pessoas na fila normal
-                    #print("Atendendo(Normal): {} ".format(fila.dequeue))
+                    print(f"Atendendo: {fila.dequeue()} (Normal)")
                     atendimentos_normais += 1 #incrementa um atendimento
                 else:
                     break #se não houve pessoas na fila ele para
             if fila.sizeP > 0:
-                #print("Atendendo(Prioridade): {} ".format(fila.dequeue))
+                print(f"Atendendo: {fila.dequeue()} (Prioridade)")
                 atendimentos_prioridade += 1 #incrementa um atendimento
 
     elif (op == '3'):
         print("-----------------------------------------------------")
-        if fila.is_empty:
+        if fila.is_empty():
             print("A fila está vazia!")
         else:
             print("--------FILA--------")
@@ -72,7 +72,17 @@ while True:
             if total > 0:
                 percentual_normal = (atendimentos_normais/total) * 100
                 percentual_prioridade = (atendimentos_prioridade/total) * 100
-
+            else:
+                percentual_normal = 0
+                percentual_prioridade = 0
+            
+            print("--------ESTATÍSTICAS--------")
+            print("Total de atendimentos: {:.2f}".format(total))
+            print("Percentual de atendimentos normais: {:.2f}".format(percentual_normal))
+            print("Percentual de atendimentos prioritários: {:.2f}".format(percentual_prioridade))
+            break
+        else:
+            print("Ainda há pessoas na fila!\n")
 
     else:
         print("-----------------------------------------------------")
