@@ -5,7 +5,7 @@ def menu():
     print("1. Chegada de pessoa para atendimento")
     print("2. Atendimento de uma pessoa")
     print("3. Listar todas as pessoas da fila")
-    print("4. Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
+    print("4.  Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
     print("5. SAIR")
     
 
@@ -46,12 +46,12 @@ while True:
         else:
             for _ in range(3): #atende 3 pessoas normais 
                 if fila.sizeN > 0: #verifica se há pessoas na fila normal
-                    print(f"Atendendo: {fila.dequeue()} (Normal)")
+                    print(f"Atendendo: {fila.dequeue()} (normal)")
                     atendimentos_normais += 1 #incrementa um atendimento
                 else:
                     break #se não houve pessoas na fila ele para
             if fila.sizeP > 0:
-                print(f"Atendendo: {fila.dequeue()} (Prioridade)")
+                print(f"Atendendo: {fila.dequeue()} (prioridade)")
                 atendimentos_prioridade += 1 #incrementa um atendimento
 
     elif (op == '3'):
@@ -64,6 +64,9 @@ while True:
 
     elif (op == '4'):
         print("-----------------------------------------------------")
+        print("INFORMAÇÕES DOS ATENDIMENTOS:")
+        print(f"ATENDIMENTOS NORMAIS: {atendimentos_normais}, ATENDIMENTOS PRIORITÁRIOS: {atendimentos_prioridade}")
+        print(f"TAMANHO ATUAL DA FILA:\nNORMAIS: {fila.sizeN}, PRIORITÁRIOS: {fila.sizeP}")
 
     elif (op == '5'):
         print("-----------------------------------------------------")
