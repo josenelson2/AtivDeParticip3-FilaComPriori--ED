@@ -5,10 +5,9 @@ def menu():
     print("1. Chegada de pessoa para atendimento")
     print("2. Atendimento de uma pessoa")
     print("3. Listar todas as pessoas da fila")
-    print("4.  Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
+    print("4. Gerar informações sobre os atendimentos realizados e o tamanho atual da fila")
     print("5. SAIR")
     
-
 fila = priorityQueue()
 atendimentos_normais = 0
 atendimentos_prioridade = 0
@@ -44,14 +43,20 @@ while True:
         if fila.is_empty(): #verifica se a fila está vazia
             print("A fila está vazia!\n")
         else:
-            for _ in range(3): #atende 3 pessoas normais 
-                if fila.sizeN > 0: #verifica se há pessoas na fila normal
-                    print(f"Atendendo: {fila.dequeue()} (normal)")
-                    atendimentos_normais += 1 #incrementa um atendimento
-                else:
-                    break #se não houve pessoas na fila ele para
-            if fila.sizeP > 0:
-                print(f"Atendendo: {fila.dequeue()} (prioridade)")
+            atendidos = 0
+
+        while atendidos < 3 and fila.sizeN  > 0:
+            nome = fila.priority_dequeue(False)
+            if nome:
+                print(f"Atendendo: {nome} (normal)") 
+                atendimentos_normais += 1 #incrementa um atendimento
+                atendidos += 1
+            else:
+                break
+        if fila.sizeP > 0:
+            nome = fila.priority_dequeue(True)
+            if nome:
+                print(f"Atendendo: {nome} (prioridade)")
                 atendimentos_prioridade += 1 #incrementa um atendimento
 
     elif (op == '3'):
@@ -81,8 +86,8 @@ while True:
             
             print("--------ESTATÍSTICAS--------")
             print("Total de atendimentos: {:.2f}".format(total))
-            print("Percentual de atendimentos normais: {:.2f}".format(percentual_normal))
-            print("Percentual de atendimentos prioritários: {:.2f}".format(percentual_prioridade))
+            print("Percentual de atendimentos normais: {:.2f}%".format(percentual_normal))
+            print("Percentual de atendimentos prioritários: {:.2f}%".format(percentual_prioridade))
             break
         else:
             print("Ainda há pessoas na fila!\n")
